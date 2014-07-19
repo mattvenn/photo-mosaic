@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 size = 50
-colour_step = 50
+colour_step = 20
 for R in range(0,255,colour_step):
     for G in range(0,255,colour_step):
         for B in range(0,255,colour_step):

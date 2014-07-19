@@ -4,22 +4,21 @@ from PIL import Image, ImageDraw
 image_file = "face.jpg"
 output_file = "pixeled.jpg"
 img = Image.open(image_file)
-draw = ImageDraw.Draw(img)
 img_width = img.size[0]
 img_height = img.size[1]
 print("opened %s [%d x %d]" % (image_file,img_width,img_height))
 
+pix_img = Image.new("RGB",(img_width,img_height))
+draw = ImageDraw.Draw(pix_img)
+
 #sums to work out how many and how big the tiles are
-x_tiles = 10
+x_tiles = 20
 tile_width = img_width / x_tiles
 #assume square tiles
 y_tiles = img_height / tile_width
 
 #function that returns the average value of a region of pixels
-def avg_region(image,x,y,width):
-    x = int(x)
-    y = int(y) 
-    box = ( x, y, x+width, y+width)
+def avg_region(image,box):
     region = image.crop(box)
     colors = region.getcolors(region.size[0]*region.size[1])
     max_occurence, most_present = 0, 0
@@ -33,13 +32,12 @@ for x in range(0,img_width,tile_width):
     for y in range(0,img_height,tile_width):
         #and for each of those squares, 
         #find the average colour
-        avg_colour = avg_region(img,x,y,tile_width)
+        box = (x, y, x+tile_width, y+tile_width)
+        avg_colour = avg_region(img,box)
 
         #replace that region with a uniform colour
-        box = ( x, y, x+tile_width, y+tile_width)
         draw.rectangle(box,fill=avg_colour)
 
 #save it!
 print("saved as %s" % output_file)
-img.save(output_file)
-img.show()
+pix_img.save(output_file)

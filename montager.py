@@ -25,7 +25,7 @@ num_files = len(all_files)
 
 #now for all the tiles in the image
 for x in range(0,mont_width,tile_width):
-    for y in range(0,mont_width,tile_width):
+    for y in range(0,mont_height,tile_width):
 
         #pick a random image from the directory
         file = all_files[random.randint(0,num_files-1)]
