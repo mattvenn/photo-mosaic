@@ -54,4 +54,5 @@ I wrote a little program called [image_creator.py](image_creator.py) that create
 
 ### Improve
 
-My program runs slowly on real image data, because the images are large and take a while to create the average value. An improvement would be to store analysed image data in a file, and then just read that file instead of having to regenerate it every time I run the mosiac program.
+* My program runs slowly on real image data, because the images are large and take a while to create the average value. An improvement would be to store analysed image data in a file, and then just read that file instead of having to regenerate it every time I run the mosiac program.
+* The fetch_random.py program takes a long time to get random photos. Make it multi threaded for parallel fetching.
