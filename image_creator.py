@@ -1,3 +1,6 @@
+"""
+makes a lot of small images that cover the whole colour range in small steps
+"""
 from PIL import Image, ImageDraw
 size = 50
 colour_step = 20
