@@ -11,13 +11,13 @@ template_width = template_img.size[0]
 template_height = template_img.size[1]
 template_aspect = float(template_height) / float(template_width)
 
-#how big we want the mosiac to be
-mos_width = 640
+#how big we want the mosaic to be
+mos_width = 1000
 mos_height = int(mos_width * template_aspect)
 print("mos height = %d" % mos_height)
 
 #number of photos we want to use across x
-x_tiles = 20
+x_tiles = 50
 y_tiles = int(template_aspect * x_tiles)
 
 #sums to work out how many and how big the tiles are
@@ -40,7 +40,7 @@ def avg_region(image,box):
     return most_present
 
 #get all the images in our image directory
-all_files = os.listdir(image_dir)
+all_files = sorted(os.listdir(image_dir))
 num_files = len(all_files)
 
 #new list to store analysed image
@@ -49,7 +49,7 @@ analysed = []
 #analyse all those images to get the average colour
 print("starting analyis")
 for file in all_files:
-    print("."),
+    print(file)
     try:
         img = Image.open(image_dir + file)
         img_width = img.size[0]
@@ -67,8 +67,7 @@ for file in all_files:
 print("")
 print("analysed %d files" % len(all_files))
 
-#analysed = sorted(analysed,key=lambda x: x[0])
-
+#routine to get the closest image to the colour we want
 def get_close_image(target_colour):
     #start large
     closest_match = 1000
@@ -80,9 +79,11 @@ def get_close_image(target_colour):
             closest_colour = avg_colour
             closest_file = file
 
-    print("closest to %s was %s" % (target_colour, closest_colour))
+#    print("closest to %s was %s" % (target_colour, closest_colour))
     return closest_file
 
+
+print("working on target tiles %d x %d" % (x_tiles,y_tiles))
 #now for all the tiles in the template image
 for x_tile in range(x_tiles):
     for y_tile in range(y_tiles):
@@ -92,6 +93,8 @@ for x_tile in range(x_tiles):
         y = y_tile * template_tile_width
         box = (x, y, x+template_tile_width, y+template_tile_width)
         avg_colour = avg_region(template_img,box)
+
+        print("%d, %d = %s" % (x_tile, y_tile, avg_colour))
 
         #find an image that matches the hue in our sorted list
         file = get_close_image(avg_colour)
@@ -111,5 +114,6 @@ for x_tile in range(x_tiles):
             print(tile.size)
 
 #save it!
-mos_image.save("mosiac.jpg")
+print("saving as mosaic.jpg")
+mos_image.save("mosaic.jpg")
 

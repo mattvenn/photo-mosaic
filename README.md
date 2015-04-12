@@ -3,9 +3,9 @@
 * get random internet images
 * better examples
 
-# Build a photo mosiac program
+# Build a photo mosaic program
 
-![mosiac.jpg](mosiac.jpg)
+![mosaic.jpg](mosaic.jpg)
 
 * Show some examples
 * Start with a discussion about what is happening
@@ -44,15 +44,15 @@ Follow the same discussion process as above, your students should arrive at some
 * crop them to be the right size
 * stitch them all together and save as a new file
 
-## Combine them both to make the mosiac maker
+## Combine them both to make the mosaic maker
 
-So now we're at the stage where we've solved the problems we face to build the mosiac maker. We can use the programs, or parts of the programs to build a new program that creates the mosiac.
+So now we're at the stage where we've solved the problems we face to build the mosaic maker. We can use the programs, or parts of the programs to build a new program that creates the mosaic.
 
 ### Testing
 
-I wrote a little program called [image_creator.py](image_creator.py) that creates uniform little squares of varying colours. This way I can test my mosiac maker works but giving it every colour it needs.
+I wrote a little program called [image_creator.py](image_creator.py) that creates uniform little squares of varying colours. This way I can test my mosaic maker works but giving it every colour it needs.
 
 ### Improve
 
-* My program runs slowly on real image data, because the images are large and take a while to create the average value. An improvement would be to store analysed image data in a file, and then just read that file instead of having to regenerate it every time I run the mosiac program.
+* My program runs slowly on real image data, because the images are large and take a while to create the average value. An improvement would be to store analysed image data in a file, and then just read that file instead of having to regenerate it every time I run the mosaic program.
 * The fetch_random.py program takes a long time to get random photos. Make it multi threaded for parallel fetching.
